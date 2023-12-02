@@ -1,0 +1,50 @@
+{
+  "name": "the_battries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "NODE_ENV=production node -r module-alias/register ./dist",
+    "start:dev": "nodemon",
+    "lint": "./node_modules/.bin/eslint . --ext .ts --ext .js"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "ignore": [],
+    "exec": "ts-node --files -r ./src"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "envalid": "^8.0.0",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "helmet": "^7.1.0",
+    "http-status-codes": "^2.3.0",
+    "mongoose": "^8.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.6",
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.0.1"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=17.x"
+  }
+}
