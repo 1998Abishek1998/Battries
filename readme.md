@@ -18,7 +18,7 @@ the returned batteries, such as: total and average watt capacity.
   
     1) Create new file ".env" and Add the following
 
-      ##### VITE_API_URL="http://localhost:8000"
+      #### VITE_API_URL="http://localhost:8000"
 
     2) cd Client
     
