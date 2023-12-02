@@ -9,6 +9,7 @@ import { setBattries } from '../state/appSlice'
 import BatteryTable from './BatteryTable';
 import BatteryModal from './BatteryModal';
 import BatteryFilters from './BatteryFilter';
+import useNotify from '../hooks/useNotify';
 
 const Battery = () => {
   const [paginationData, setPaginationData] = useState({
@@ -19,6 +20,7 @@ const Battery = () => {
   const [count, setCount] = useState(1)
   const dispatch =  useDispatch() 
   const battery = useSelector(st => st.app.battery);
+  const handleError = useNotify('error');
 
   useEffect(() => {
     if(count === 1) {
@@ -27,12 +29,15 @@ const Battery = () => {
           dispatch(setBattries(data.data))
           setCount(2)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          handleError(err.message)
+        })
     }
   },[paginationData, count])
 
   return (
-    <>
+    <>      handleSuccess()
+
       {
         battery && <>
           <PageHeader

@@ -2,57 +2,26 @@
 
 import { Input, Space, Slider,Row, Col, InputNumber, Popover, Button } from 'antd';
 import { useState } from 'react';
+import useNotify from '../hooks/useNotify';
 
 const { Search } = Input;
 
-const PostCodeStart = ({setPaginationData, setCount}) => {
+const PostCodeVal = ({setPaginationData, setCount, type}) => {
   const [inputValue, setInputValue] = useState(1);
   
   const onChange = (newValue) => {
     setInputValue(newValue);
-    setPaginationData({postCodeStart: newValue})
+    if(type === 'start') setPaginationData({ postCodeStart: newValue })
+    if(type === 'end') setPaginationData({ postCodeEnd: newValue})
     setCount(1)
   };
 
   return (
     <Row>
       <Col span={12}>
-        Post Code Start
-        <Slider
-          min={1}
-          max={9999999999}
-          onChange={onChange}
-          value={typeof inputValue === 'number' ? inputValue : 0}
-        />
-      </Col>
-      <Col span={4}>
-        <InputNumber
-          min={1}
-          max={9999999999}
-          style={{
-            margin: '0 16px',
-          }}
-          value={inputValue}
-          onChange={onChange}
-        />
-      </Col>
-    </Row>
-  );
-};
-
-const PostCodeEnd = ({setPaginationData, setCount}) => {
-  const [inputValue, setInputValue] = useState(1);
-  
-  const onChange = (newValue) => {
-    setInputValue(newValue);
-    setPaginationData({postCodeEnd: newValue})
-    setCount(1)
-  };
-
-  return (
-    <Row>
-      <Col span={12}>
-        Post Code End
+          {
+            type === 'start' ? 'Post Code Start' : 'Post Code End'
+          } 
         <Slider
           min={1}
           max={9999999999}
@@ -77,6 +46,7 @@ const PostCodeEnd = ({setPaginationData, setCount}) => {
 
 const BatteryFilters = ({setCount, setPaginationData}) => {
   const [open, setOpen] = useState(false);
+  const handleSuccess = useNotify('success')
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
@@ -101,8 +71,8 @@ const BatteryFilters = ({setCount, setPaginationData}) => {
        <Popover
       content={
       <div>
-        <PostCodeStart setPaginationData={setPaginationData} setCount={setCount}/>
-        <PostCodeEnd setPaginationData={setPaginationData} setCount={setCount}/> 
+        <PostCodeVal setPaginationData={setPaginationData} setCount={setCount} type={'start'}/>
+        <PostCodeVal setPaginationData={setPaginationData} setCount={setCount} type={'end'}/> 
       </div>
       }
       title="Filters"

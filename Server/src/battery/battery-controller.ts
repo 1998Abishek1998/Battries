@@ -28,7 +28,7 @@ const batteryController = async (req: Request, res: Response) => {
   }
 
   res.status(StatusCodes.OK).json({
-    message: 'Data fetched Successfully.',
+    message: 'Battery updated Successfully.',
     data,
   })
 }
